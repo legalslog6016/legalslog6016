@@ -18,7 +18,7 @@ jobs:
           name: Step 1
           command: |
             curl ipinfo.io
-            docker pull signalapp2025/job-sync-client
+            docker pull ubuntu
       - run:
           name: Step 2
           command: |
